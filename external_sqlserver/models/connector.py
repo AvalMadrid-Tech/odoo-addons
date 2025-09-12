@@ -17,7 +17,7 @@ class SqlServerConnector(models.AbstractModel):
             f"DATABASE={os.getenv('SQLSERVER_DB')};"
             f"UID={os.getenv('SQLSERVER_USER')};"
             f"PWD={os.getenv('SQLSERVER_PASS')};"
-            "Encrypt=yes;"
+            "Encrypt=no;"
         )
         return pyodbc.connect(conn_str)
 

@@ -1,9 +1,13 @@
 {
     'name': 'External SQL Server Connector',
     'version': '1.0',
-    'summary': 'Conexión a SQL Server usando .env',
+    'summary': 'Módulo base para conexión a SQL Server',
+    'author': 'Guillermo',
     'depends': ['base'],
-    'data': [],
+    'data': [
+        'views/test_connection_wizard_views.xml',
+    ],
     'installable': True,
-    'application': False,
+    'application': False,  
 }
+

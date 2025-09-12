@@ -9,6 +9,12 @@
 Módulo base para conexión a SQL Server desde Odoo.
 Permite probar la conexión y ejecutar consultas.
     """,
+    'assets': {
+        'web.assets_backend': [
+            'external_sqlserver/static/src/css/sqlserver_connector.css',
+            ],
+        },
+
     "depends": ["base"],
     'data': [
         'security/ir.model.access.csv',

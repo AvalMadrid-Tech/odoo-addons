@@ -4,14 +4,19 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
+
             <xpath expr="//form" position="inside">
-                <group string="SQL Server Connector">
+                <div class="sqlserver-title">
+                    SQL SERVER CONNECTOR
+                </div>
+                <div>
                     <button name="%(action_open_test_sqlserver_connection)d"
                             type="action"
                             string="Probar conexión SQL Server"
-                            class="btn-primary"/>
-                </group>
+                            class="btn btn-primary sqlserver-button"/>
+                </div>
             </xpath>
+
         </field>
     </record>
 </odoo>

@@ -1,0 +1,14 @@
+/* Título con estilo igual al bloque "Sobre" */
+.o_setting_container .sqlserver-title {
+    background-color: #f0f2f5; 
+    margin-top: 16px;
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 8px 0px 8px 30px;
+}
+/* Botón con margen */
+.o_setting_container .sqlserver-button {
+    margin-left: 75px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

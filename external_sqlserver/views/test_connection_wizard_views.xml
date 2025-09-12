@@ -1,20 +1,12 @@
 <odoo>
-    <!-- Acción del wizard -->
-    <record id="action_test_sqlserver_connection" model="ir.actions.act_window">
-        <field name="name">Probar conexión SQL Server</field>
-        <field name="res_model">sqlserver.test.connection.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
     <!-- Vista del wizard -->
-    <record id="view_test_sqlserver_connection_form" model="ir.ui.view">
-        <field name="name">sqlserver.test.connection.form</field>
+    <record id="view_sqlserver_test_connection_wizard" model="ir.ui.view">
+        <field name="name">sqlserver.test.connection.wizard.form</field>
         <field name="model">sqlserver.test.connection.wizard</field>
         <field name="arch" type="xml">
             <form string="Probar conexión SQL Server">
                 <group>
-                    <field name="result" nolabel="1" readonly="1" colspan="2"/>
+                    <field name="result" nolabel="1" readonly="1"/>
                 </group>
                 <footer>
                     <button string="Cerrar" class="btn-primary" special="cancel"/>
@@ -23,10 +15,12 @@
         </field>
     </record>
 
-    <!-- Menú en Ajustes → Técnico -->
-    <menuitem id="menu_sqlserver_test"
-              name="Probar conexión SQL Server"
-              parent="base.menu_administration"
-              action="action_test_sqlserver_connection"
-              sequence="50"/>
+    <!-- Acción que abre el wizard -->
+    <record id="action_open_test_sqlserver_connection" model="ir.actions.act_window">
+        <field name="name">Probar conexión SQL Server</field>
+        <field name="res_model">sqlserver.test.connection.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_sqlserver_test_connection_wizard"/>
+    </record>
 </odoo>

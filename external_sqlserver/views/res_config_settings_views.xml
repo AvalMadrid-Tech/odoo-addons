@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_res_config_settings_sqlserver" model="ir.ui.view">
+        <field name="name">res.config.settings.sqlserver</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <group string="SQL Server Connector">
+                    <button name="%(action_open_test_sqlserver_connection)d"
+                            type="action"
+                            string="Probar conexión SQL Server"
+                            class="btn-primary"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

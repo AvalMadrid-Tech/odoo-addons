@@ -1,9 +1,10 @@
 <odoo>
+    <!-- Vista Tree (lista) -->
     <record id="view_company_regulation_tree" model="ir.ui.view">
         <field name="name">company.regulation.tree</field>
         <field name="model">company.regulation</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Normativas">
                 <field name="name"/>
                 <field name="category_id"/>
                 <field name="published_date"/>
@@ -14,11 +15,12 @@
         </field>
     </record>
 
+    <!-- Vista Form -->
     <record id="view_company_regulation_form" model="ir.ui.view">
         <field name="name">company.regulation.form</field>
         <field name="model">company.regulation</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Normativa">
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -39,13 +41,20 @@
         </field>
     </record>
 
-    <menuitem id="menu_company_regulation_root" name="Normativas"/>
-    <menuitem id="menu_company_regulation" name="Gestión de Normativas" parent="menu_company_regulation_root"/>
-
+    <!-- Acción principal -->
     <record id="action_company_regulation" model="ir.actions.act_window">
         <field name="name">Normativas</field>
         <field name="res_model">company.regulation</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="menu_company_regulation_main" name="Documentos" parent="menu_company_regulation" action="action_company_regulation"/>
+
+    <!-- Menú raíz -->
+    <menuitem id="menu_company_regulation_root" name="Normativas" sequence="10"/>
+
+    <!-- Menú de Documentos (visible para todos los usuarios internos) -->
+    <menuitem id="menu_company_regulation_main"
+              name="Documentos"
+              parent="menu_company_regulation_root"
+              action="action_company_regulation"
+              groups="base.group_user"/>
 </odoo>

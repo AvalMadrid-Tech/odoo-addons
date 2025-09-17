@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_company_regulation_user,access.company.regulation.user,model_company_regulation,base.group_user,1,1,1,0
-access_company_regulation_manager,access.company.regulation.manager,model_company_regulation,base.group_system,1,1,1,1
-access_company_regulation_category_user,access.company.regulation.category.user,model_company_regulation_category,base.group_user,1,0,0,0
-access_company_regulation_category_manager,access.company.regulation.category.manager,model_company_regulation_category,base.group_system,1,1,1,1
+access_normativa_user,access.normativa.user,model_company_regulation,base.group_user,1,0,0,0
+access_normativa_admin,access.normativa.admin,model_company_regulation,base.group_system,1,1,1,1
+access_normativa_category_user,access.normativa.category.user,model_company_regulation_category,base.group_user,1,0,0,0
+access_normativa_category_admin,access.normativa.category.admin,model_company_regulation_category,base.group_system,1,1,1,1

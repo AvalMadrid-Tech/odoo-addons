@@ -1,0 +1,8 @@
+<odoo>
+    <!-- Grupo específico para gestionar normativas -->
+    <record id="group_normativa_manager" model="res.groups">
+        <field name="name">Responsables de Normativas</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+        <field name="comment">Usuarios con permisos para crear, editar y eliminar normativas.</field>
+    </record>
+</odoo>

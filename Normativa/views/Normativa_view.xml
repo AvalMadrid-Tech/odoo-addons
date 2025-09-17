@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_company_regulation_tree" model="ir.ui.view">
+        <field name="name">company.regulation.tree</field>
+        <field name="model">company.regulation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="published_date"/>
+                <field name="expiration_date"/>
+                <field name="responsible_id"/>
+                <field name="is_mandatory"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_company_regulation_form" model="ir.ui.view">
+        <field name="name">company.regulation.form</field>
+        <field name="model">company.regulation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="category_id"/>
+                        <field name="document" filename="document_filename"/>
+                        <field name="document_filename" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                        <field name="published_date"/>
+                        <field name="expiration_date"/>
+                        <field name="responsible_id"/>
+                        <field name="is_mandatory"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_company_regulation_root" name="Normativas"/>
+    <menuitem id="menu_company_regulation" name="Gestión de Normativas" parent="menu_company_regulation_root"/>
+
+    <record id="action_company_regulation" model="ir.actions.act_window">
+        <field name="name">Normativas</field>
+        <field name="res_model">company.regulation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_company_regulation_main" name="Documentos" parent="menu_company_regulation" action="action_company_regulation"/>
+</odoo>

@@ -1,26 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Vista List -->
-    <record id="view_company_regulation_list" model="ir.ui.view">
-        <field name="name">company.regulation.list</field>
-        <field name="model">company.regulation</field>
+
+    <!-- ====================================================== -->
+    <!--                VISTAS DE CATEGORÍAS                   -->
+    <!-- ====================================================== -->
+    <record id="view_company_regulation_category_tree" model="ir.ui.view">
+        <field name="name">company.regulation.category.tree</field>
+        <field name="model">company.regulation.category</field>
         <field name="arch" type="xml">
-            <list string="Normativas">
+            <list string="Categorías">
                 <field name="name"/>
-                <field name="category_id"/>
-                <field name="published_date"/>
-                <field name="expiration_date"/>
-                <field name="responsible_id"/>
-                <field name="is_mandatory"/>
+                <field name="parent_id"/>
+                <field name="description"/>
             </list>
         </field>
     </record>
 
-    <!-- Vista Form -->
+    <record id="view_company_regulation_category_form" model="ir.ui.view">
+        <field name="name">company.regulation.category.form</field>
+        <field name="model">company.regulation.category</field>
+        <field name="arch" type="xml">
+            <form string="Categoría">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="parent_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Subcategorías">
+                            <field name="child_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Documentos">
+                            <field name="regulation_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="published_date"/>
+                                    <field name="expiration_date"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ====================================================== -->
+    <!--                VISTAS DE DOCUMENTOS                   -->
+    <!-- ====================================================== -->
+    <record id="view_company_regulation_tree" model="ir.ui.view">
+        <field name="name">company.regulation.tree</field>
+        <field name="model">company.regulation</field>
+        <field name="arch" type="xml">
+            <list string="Documentos">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="published_date"/>
+                <field name="expiration_date"/>
+                <field name="status"/>
+                <field name="responsible_id"/>
+            </list>
+        </field>
+    </record>
+
     <record id="view_company_regulation_form" model="ir.ui.view">
         <field name="name">company.regulation.form</field>
         <field name="model">company.regulation</field>
         <field name="arch" type="xml">
-            <form string="Normativa">
+            <form string="Documento">
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -32,29 +86,61 @@
                         <field name="description"/>
                         <field name="published_date"/>
                         <field name="expiration_date"/>
+                        <field name="status"/>
                         <field name="responsible_id"/>
                         <field name="is_mandatory"/>
-                        <field name="active"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Acción principal -->
+    <!-- ====================================================== -->
+    <!--                ACCIONES                                -->
+    <!-- ====================================================== -->
+    <record id="action_company_regulation_category" model="ir.actions.act_window">
+        <field name="name">Categorías</field>
+        <field name="res_model">company.regulation.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('parent_id','=',False)]</field>
+    </record>
+
+    <record id="action_company_regulation_subcategory" model="ir.actions.act_window">
+        <field name="name">Subcategorías</field>
+        <field name="res_model">company.regulation.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('parent_id','!=',False)]</field>
+    </record>
+
     <record id="action_company_regulation" model="ir.actions.act_window">
-        <field name="name">Normativas</field>
+        <field name="name">Documentos</field>
         <field name="res_model">company.regulation</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menú raíz -->
-    <menuitem id="menu_company_regulation_root" name="Normativas" sequence="10"/>
+    <!-- ====================================================== -->
+    <!--                MENÚS                                   -->
+    <!-- ====================================================== -->
+    <menuitem id="menu_normativas_root"
+              name="Normativas"
+              sequence="10"/>
 
-    <!-- Menú de Documentos -->
-    <menuitem id="menu_company_regulation_main"
+    <menuitem id="menu_company_regulation_category"
+              name="Categorías"
+              parent="menu_normativas_root"
+              action="action_company_regulation_category"
+              sequence="10"/>
+
+    <menuitem id="menu_company_regulation_subcategory"
+              name="Subcategorías"
+              parent="menu_normativas_root"
+              action="action_company_regulation_subcategory"
+              sequence="20"/>
+
+    <menuitem id="menu_company_regulation_document"
               name="Documentos"
-              parent="menu_company_regulation_root"
+              parent="menu_normativas_root"
               action="action_company_regulation"
-              groups="base.group_user"/>
+              sequence="30"/>
+
 </odoo>

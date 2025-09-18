@@ -1,17 +1,17 @@
 <odoo>
-    <!-- Vista Tree (lista) -->
-    <record id="view_company_regulation_tree" model="ir.ui.view">
-        <field name="name">company.regulation.tree</field>
+    <!-- Vista List -->
+    <record id="view_company_regulation_list" model="ir.ui.view">
+        <field name="name">company.regulation.list</field>
         <field name="model">company.regulation</field>
         <field name="arch" type="xml">
-            <tree string="Normativas">
+            <list string="Normativas">
                 <field name="name"/>
                 <field name="category_id"/>
                 <field name="published_date"/>
                 <field name="expiration_date"/>
                 <field name="responsible_id"/>
                 <field name="is_mandatory"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -45,13 +45,13 @@
     <record id="action_company_regulation" model="ir.actions.act_window">
         <field name="name">Normativas</field>
         <field name="res_model">company.regulation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú raíz -->
     <menuitem id="menu_company_regulation_root" name="Normativas" sequence="10"/>
 
-    <!-- Menú de Documentos (visible para todos los usuarios internos) -->
+    <!-- Menú de Documentos -->
     <menuitem id="menu_company_regulation_main"
               name="Documentos"
               parent="menu_company_regulation_root"

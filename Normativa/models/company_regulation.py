@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class CompanyRegulation(models.Model):
-    _name = "normativa"
+    _name = "company.regulation"
     _description = "Normativas de AvalMadrid"
 
     name = fields.Char("Título", required=True)

@@ -1,1 +1,1 @@
-from . import regulation
+from . import company_regulation

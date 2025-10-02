@@ -2,101 +2,119 @@
 <odoo>
 
     <!-- ====================================================== -->
-    <!--                VISTAS DE CATEGORÍAS                   -->
+    <!--                VISTA TREE CATEGORÍAS                   -->
     <!-- ====================================================== -->
-    <record id="view_company_regulation_category_tree" model="ir.ui.view">
-        <field name="name">company.regulation.category.tree</field>
-        <field name="model">company.regulation.category</field>
-        <field name="arch" type="xml">
-            <list string="Categorías">
-                <field name="name"/>
-                <field name="parent_id"/>
-                <field name="description"/>
-            </list>
-        </field>
-    </record>
+<record id="view_company_regulation_category_tree" model="ir.ui.view">
+    <field name="name">company.regulation.category.tree</field>
+    <field name="model">company.regulation.category</field>
+    <field name="arch" type="xml">
+        <list string="Categorías">
+            <field name="name"/>
+            <field name="parent_id"/>
+            <field name="description"/>
+        </list>
+    </field>
+</record>
 
-    <record id="view_company_regulation_category_form" model="ir.ui.view">
-        <field name="name">company.regulation.category.form</field>
-        <field name="model">company.regulation.category</field>
-        <field name="arch" type="xml">
-            <form string="Categoría">
-                <sheet>
-                    <group>
-                        <field name="name"/>
+
+
+    <!-- ====================================================== -->
+    <!--                VISTA FORMULARIO CATEGORÍAS             -->
+    <!-- ====================================================== -->
+<record id="view_company_regulation_category_form" model="ir.ui.view">
+    <field name="name">company.regulation.category.form</field>
+    <field name="model">company.regulation.category</field>
+    <field name="arch" type="xml">
+        <form string="Categoría">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <field name="description"/>
+                </group>
+                <notebook>
+                    <page string="Subcategorías">
+                        <field name="child_ids"/>
+                    </page>
+                    <page string="Normativas">
+                        <field name="regulation_ids"/>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <!-- ====================================================== -->
+    <!--                VISTA FORMULARIO DOCUMENTO              -->
+    <!-- ====================================================== -->
+   <record id="view_company_regulation_form" model="ir.ui.view">
+    <field name="name">company.regulation.form</field>
+    <field name="model">company.regulation</field>
+    <field name="arch" type="xml">
+        <form string="Normativa">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="responsible_id"/>
+                    <field name="status"/>
+                </group>
+                <group>
+                    <field name="published_date"/>
+                    <field name="expiration_date"/>
+                </group>
+                <group>
+                    <field name="is_mandatory"/>
+                    <field name="active"/>
+                </group>
+
+                <notebook>
+                    <page string="Descripción">
                         <field name="description"/>
-                        <field name="parent_id"/>
-                    </group>
-                    <notebook>
-                        <page string="Subcategorías">
-                            <field name="child_ids">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="description"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Documentos">
-                            <field name="regulation_ids">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="published_date"/>
-                                    <field name="expiration_date"/>
-                                    <field name="status"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
+                    </page>
+
+                    <page string="Documento">
+                        <!-- Subida + vista previa PDF -->
+                        <field name="document" filename="document_filename" widget="pdf_viewer"/>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+<record id="view_company_regulation_tree" model="ir.ui.view">
+    <field name="name">company.regulation.tree</field>
+    <field name="model">company.regulation</field>
+    <field name="arch" type="xml">
+        <list string="Documentos"
+              decoration-success="status == 'active'"
+              decoration-danger="status == 'revoked'">
+            <field name="name"/>
+            <field name="category_id"/>
+            <field name="published_date"/>
+            <field name="expiration_date"/>
+            <field name="status"/>
+            <field name="responsible_id"/>
+
+            <!-- Botones por fila -->
+            <button name="action_preview_document"
+                    type="object"
+                    icon="fa-eye"
+                    string=""/>
+                        
+            <button name="action_download_document"
+                    type="object"
+                    icon="fa-download"
+                    string=""/>
+        </list>
+    </field>
+</record>
 
     <!-- ====================================================== -->
-    <!--                VISTAS DE DOCUMENTOS                   -->
-    <!-- ====================================================== -->
-    <record id="view_company_regulation_tree" model="ir.ui.view">
-        <field name="name">company.regulation.tree</field>
-        <field name="model">company.regulation</field>
-        <field name="arch" type="xml">
-            <list string="Documentos">
-                <field name="name"/>
-                <field name="category_id"/>
-                <field name="published_date"/>
-                <field name="expiration_date"/>
-                <field name="status"/>
-                <field name="responsible_id"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="view_company_regulation_form" model="ir.ui.view">
-        <field name="name">company.regulation.form</field>
-        <field name="model">company.regulation</field>
-        <field name="arch" type="xml">
-            <form string="Documento">
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="category_id"/>
-                        <field name="document" filename="document_filename"/>
-                        <field name="document_filename" invisible="1"/>
-                    </group>
-                    <group>
-                        <field name="description"/>
-                        <field name="published_date"/>
-                        <field name="expiration_date"/>
-                        <field name="status"/>
-                        <field name="responsible_id"/>
-                        <field name="is_mandatory"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <!-- ====================================================== -->
-    <!--                ACCIONES                                -->
+    <!--                ACCIONES Y MENÚS                        -->
     <!-- ====================================================== -->
     <record id="action_company_regulation_category" model="ir.actions.act_window">
         <field name="name">Categorías</field>
@@ -118,9 +136,15 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- ====================================================== -->
-    <!--                MENÚS                                   -->
-    <!-- ====================================================== -->
+    <record id="action_company_regulation_llm" model="ir.actions.server">
+        <field name="name">Ejecutar LLM</field>
+        <field name="model_id" ref="model_company_regulation_category"/>
+        <field name="state">code</field>
+        <field name="code">action = env['company.regulation.category'].action_llm()</field>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+
     <menuitem id="menu_normativas_root"
               name="Normativas"
               sequence="10"/>
@@ -142,5 +166,13 @@
               parent="menu_normativas_root"
               action="action_company_regulation"
               sequence="30"/>
+            
+    <menuitem id="menu_company_regulation_llm"
+            name="Actualizar Normativa"
+            parent="menu_normativas_root"
+            action="action_company_regulation_llm"
+            sequence="40"/>
+
+
 
 </odoo>

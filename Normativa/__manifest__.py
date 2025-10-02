@@ -18,6 +18,7 @@ Permite:
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/Normativa_view.xml',
+        'views/import_summary_wizard.xml',
     ],
     'application': True,
     'installable': True,
